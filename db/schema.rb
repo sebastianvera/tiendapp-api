@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612184833) do
+ActiveRecord::Schema.define(version: 20140614232652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "unit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "catalogs", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "provider_id"
+    t.float    "price"
+    t.integer  "stock"
+    t.integer  "min_quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -31,5 +49,29 @@ ActiveRecord::Schema.define(version: 20140612184833) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "inventories", force: true do |t|
+    t.integer  "max_quantity"
+    t.integer  "min_quantity"
+    t.integer  "stock"
+    t.integer  "daily_consume"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "article_id"
+  end
+
+  add_index "inventories", ["article_id"], name: "index_inventories_on_article_id", using: :btree
+
+  create_table "providers", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.integer  "frequency"
+    t.integer  "min_order"
+    t.integer  "count",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
