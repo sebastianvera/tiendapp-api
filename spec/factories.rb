@@ -1,18 +1,24 @@
 FactoryGirl.define do
   factory :provider do
-    name 'provider name'
+    sequence(:name) { |e| "provider ##{e}" }
     address 'my address'
     phone '123-123-123'
     frequency 3
     min_order 2
   end
   factory :article do
-    name "name"
-    description "desc"
+    sequence(:name) { |e| "name #{e}" }
+    description "description example"
     unit "kg"
     trait :provider_with_stock do
       after(:create) do |instance|
         create :catalog, article: instance
+      end
+    end
+
+    trait :provider_with_no_stock do
+      after(:create) do |instance|
+        create :catalog, :impossible_order, article: instance
       end
     end
   end
@@ -20,7 +26,7 @@ FactoryGirl.define do
     provider
     article
     price 10_000
-    stock 0
+    stock 1
     min_quantity 1
 
     trait :with_stock do

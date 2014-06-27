@@ -7,7 +7,13 @@ if Rails.env.development?
       FactoryGirl.find_definitions
       include FactoryGirl::Syntax::Methods
 
-      # create(:user, email: 'user@example.com', password: 'password')
+      provider = create(:provider)
+      4.times { create(:catalog, :impossible_order, provider: provider) }
+      7.times { create(:catalog, :with_stock, provider: provider) }
+      provider = create(:provider, min_order: 4)
+      5.times { create(:catalog, :limited_by_quantity, provider: provider) }
+      6.times { create(:catalog, :with_no_stock, provider: provider) }
+      8.times { create(:catalog, :with_stock, provider: provider) }
     end
   end
 end
