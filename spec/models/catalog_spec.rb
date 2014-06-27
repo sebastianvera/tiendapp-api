@@ -22,18 +22,5 @@ describe Catalog do
       catalog = build_stubbed(:catalog, :with_no_stock)
       expect(catalog.can_deliver?).to be_false
     end
-
-    it 'returns true if the stock is greater or equal to the provider min order' do
-      catalog = build_stubbed(:catalog, :with_stock)
-      catalog.provider.min_order = catalog.stock
-
-      expect(catalog.can_deliver?).to be_true
-    end
-
-    it 'returns false if the stock is below the provider min order' do
-      catalog = build_stubbed(:catalog, :with_stock, :impossible_order)
-
-      expect(catalog.can_deliver?).to be_false
-    end
   end
 end

@@ -7,6 +7,6 @@ class Catalog < ActiveRecord::Base
   delegate :min_order, to: :provider, prefix: true, allow_nill: false
 
   def can_deliver?
-    stock >= min_quantity && stock >= provider_min_order
+    stock >= min_quantity
   end
 end

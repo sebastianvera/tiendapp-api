@@ -41,8 +41,8 @@ FactoryGirl.define do
 
     trait :with_no_stock do
       association :provider, min_order: 6
-      min_quantity 3
-      stock 5
+      min_quantity 5
+      stock 3
     end
 
     trait :limited_by_quantity do
@@ -50,5 +50,16 @@ FactoryGirl.define do
       stock 4
       min_quantity 5
     end
+  end
+  factory :order do
+    provider
+    price 3000
+    total 4
+    freight_charge 0
+  end
+
+  factory :order_list do
+    order
+    article
   end
 end
