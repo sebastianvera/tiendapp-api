@@ -1,4 +1,4 @@
-module V1
+module Api
   class ArticlesController < ApiController
     def index
       render json: Article.all, status: :ok
