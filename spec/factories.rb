@@ -53,13 +53,15 @@ FactoryGirl.define do
   end
   factory :order do
     provider
-    price 3000
-    total 4
-    freight_charge 0
+    price 0
+    freight_charge 20_000
   end
 
   factory :order_list do
     order
     article
+    unit_price 1_000
+    quantity 5
+    # price { unit_price*quantity }
   end
 end
