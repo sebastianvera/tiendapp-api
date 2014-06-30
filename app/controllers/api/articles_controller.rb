@@ -1,7 +1,7 @@
 module Api
   class ArticlesController < ApiController
     def index
-      render json: Article.all, status: :ok
+      render json: { articles: Article.all }, status: :ok
     end
 
     def create
