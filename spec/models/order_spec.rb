@@ -13,7 +13,7 @@ describe Order do
   context '#as_json' do
     it 'should add a "total" field with the result of #total ' do
       order = build_stubbed(:order)
-      expect(order.to_json).to include("total")
+      expect(order.as_json).to include("total")
       expect(order.as_json["total"]).to eq(order.total)
     end
   end
