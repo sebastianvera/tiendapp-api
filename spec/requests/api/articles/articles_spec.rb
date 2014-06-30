@@ -7,14 +7,25 @@ describe 'GET /api/articles' do
     expect(response.status).to eq 200
 
     article = create(:article)
-
     get 'api/articles'
+
     expect(response_json).to eq([model_to_json(article)])
     expect(response.status).to eq 200
   end
 end
 
-def model_to_json(model)
-  JSON.parse(model.to_json)
+describe 'POST /api/articles' do
+  it 'return article when created' do
+    attributes = { name: 'name', description: 'description', unit: 'kg' }
+    post 'api/articles',
+      attributes.to_json,
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+
+    expect(response.status).to eq 201
+    expect(response_json).to include(attributes)
+  end
 end
 
+def model_to_json(model)
+  JSON.parse(model.to_json, symbolize_names: true)
+end
