@@ -2,6 +2,7 @@ module Api
   class ArticlesController < ApiController
     def index
       render json: { articles: Article.all }, status: :ok
+      # render json: Article.all, status: :ok
     end
 
     def create
@@ -10,6 +11,13 @@ module Api
         render json: article, status: :created
       else
         render json: article.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      article = Article.find(params[:id])
+      if article.update(article_params)
+        render json: article, status: 200
       end
     end
 
