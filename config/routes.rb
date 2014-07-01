@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       get 'economic', to: 'articles#economic'
     end
     resources :providers, only: :index do
-      resources :catalogs, only: :index
+      # resources :catalogs, only: :index
+      get '/items', to: 'catalogs#index'
     end
     get 'inventory', to: 'inventory#index'
   end
