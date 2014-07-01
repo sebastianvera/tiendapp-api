@@ -4,7 +4,7 @@ if Rails.env.development?
   namespace :dev do
     desc 'Seed data for development environment'
     task prime: 'db:setup' do
-      FactoryGirl.find_definitions
+      # FactoryGirl.find_definitions
       include FactoryGirl::Syntax::Methods
 
       provider = create(:provider)
@@ -14,6 +14,9 @@ if Rails.env.development?
       5.times { create(:catalog, :limited_by_quantity, provider: provider) }
       6.times { create(:catalog, :with_no_stock, provider: provider) }
       8.times { create(:catalog, :with_stock, provider: provider) }
+      Article.take(15).each do |article|
+        create(:inventory, article: article)
+      end
     end
   end
 end
