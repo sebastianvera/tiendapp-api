@@ -15,4 +15,21 @@ describe Inventory do
   context 'references' do
     it { should belong_to :article }
   end
+
+  context '#as_json' do
+    it "should append the article's name" do
+      inventory = build_stubbed(:inventory)
+      expect(inventory.as_json).to include("article_name")
+    end
+
+    it "should append the article's description" do
+      inventory = build_stubbed(:inventory)
+      expect(inventory.as_json).to include("article_description")
+    end
+
+    it "should append the article's unit" do
+      inventory = build_stubbed(:inventory)
+      expect(inventory.as_json).to include("article_unit")
+    end
+  end
 end

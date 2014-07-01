@@ -64,4 +64,13 @@ FactoryGirl.define do
     quantity 5
     # price { unit_price*quantity }
   end
+
+  factory :inventory do
+    article
+    max_quantity 10
+    min_quantity 2
+    stock 4
+    daily_consume 7
+    price 3000
+  end
 end

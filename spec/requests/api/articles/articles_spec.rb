@@ -40,7 +40,3 @@ describe 'PUT /api/articles/:id/'  do
     expect(article.reload.name).to eq(new_name)
   end
 end
-
-def model_to_json(model)
-  JSON.parse(model.to_json, symbolize_names: true)
-end
