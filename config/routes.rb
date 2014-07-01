@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api, constraints: { format: :json } do
-    resources :articles, only: [:create, :update]
+    resources :articles, only: [:create, :update, :index]
     resources :providers, only: :index do
       resources :catalogs, only: :index
     end
