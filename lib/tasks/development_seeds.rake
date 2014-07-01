@@ -4,7 +4,7 @@ if Rails.env.development?
   namespace :dev do
     desc 'Seed data for development environment'
     task prime: 'db:setup' do
-      # FactoryGirl.find_definitions
+      FactoryGirl.find_definitions
       include FactoryGirl::Syntax::Methods
 
       provider = create(:provider)
