@@ -21,6 +21,11 @@ module Api
       end
     end
 
+    def economic
+      provider = Article.find(params[:article_id]).economic_provider
+      render json: { provider: provider }, status: :ok
+    end
+
     private
 
     def article_params

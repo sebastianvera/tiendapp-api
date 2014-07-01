@@ -26,4 +26,14 @@ describe Article do
       expect(article.available_providers).to have(1).item
     end
   end
+
+  describe '#economic_provider' do
+    it 'returns the most economic provider' do
+      provider = create(:provider)
+      article = create(:article, :with_economic_provider)
+      # Add an expensive catalog provider
+      create(:catalog, price: 999_999, provider: provider, article: article)
+      expect(article.economic_provider.id).not_to eq(provider.id)
+    end
+  end
 end

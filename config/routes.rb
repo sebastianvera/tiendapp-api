@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api, constraints: { format: :json } do
-    resources :articles, only: [:create, :update, :index]
+    resources :articles, only: [:create, :update, :index] do
+      get 'economic', to: 'articles#economic'
+    end
     resources :providers, only: :index do
       resources :catalogs, only: :index
     end

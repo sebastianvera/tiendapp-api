@@ -16,6 +16,12 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_economic_provider do
+      after(:create) do |instance|
+        create :catalog, article: instance, price: 1
+      end
+    end
+
     trait :provider_with_no_stock do
       after(:create) do |instance|
         create :catalog, :impossible_order, article: instance

@@ -14,4 +14,9 @@ class Article < ActiveRecord::Base
 
     available
   end
+
+  def economic_provider
+    provider_ids = available_providers.map(&:id)
+    catalogs.where(provider_id: provider_ids).min { |e| e.price }.try(:provider)
+  end
 end
